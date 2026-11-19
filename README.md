@@ -1,4 +1,5 @@
 # ResumeRank AI
+![CI](https://github.com/satyamsvm/Resume-Ranker-ai/actions/workflows/ci.yml/badge.svg)
 
 Rank a stack of resumes against a job description and get a shortlist **with reasons** (matched skills, missing skills, score breakdown). Built with Flask, scikit-learn and spaCy.
 
