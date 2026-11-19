@@ -1,0 +1,13 @@
+Machine Learning Engineer
+
+We are looking for a Machine Learning Engineer with 2+ years of experience to build and ship NLP and
+computer vision features. You will work closely with the product team.
+
+Requirements:
+- Bachelor's degree in Computer Science or a related field
+- Strong Python skills with pandas, numpy and scikit-learn
+- Experience with TensorFlow or PyTorch, and deep learning in general
+- Hands-on NLP experience (spaCy, NLTK or Hugging Face transformers)
+- Experience building REST APIs with Flask or FastAPI
+- Docker and Git; familiarity with AWS is a plus
+- Good communication and problem solving skills

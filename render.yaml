@@ -1,0 +1,10 @@
+# One-click deploy on Render.com (free tier works)
+services:
+  - type: web
+    name: resumerank-ai
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm
+    startCommand: gunicorn -w 2 run:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true

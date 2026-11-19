@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Ranking - ResumeRank AI{% endblock %}
+{% block content %}
+<section class="intro">
+  <h1>{{ candidates|length }} candidate{{ '' if candidates|length == 1 else 's' }} ranked{% if title %} for {{ title }}{% endif %}</h1>
+  <p class="lede">
+    Skills asked for: {% if jd.skills %}{% for s in jd.skills %}<span class="chip">{{ s }}</span>{% endfor %}{% else %}<em>none recognised in the description</em>{% endif %}
+    <br>Experience asked: {{ ('%g years' % jd.required_years) if jd.required_years else 'not stated' }}
+    &nbsp;|&nbsp; Education asked: {{ jd.required_education }}
+  </p>
+  <div class="actions">
+    <a class="btn" href="{{ url_for('main.download', rid=rid, fmt='pdf') }}">Download PDF report</a>
+    <a class="btn ghost" href="{{ url_for('main.download', rid=rid, fmt='csv') }}">Download CSV</a>
+    <a class="btn ghost" href="{{ url_for('main.index') }}">New ranking</a>
+  </div>
+</section>
+
+{% if warnings %}
+<div class="notice" role="status"><strong>Skipped:</strong>
+  <ul>{% for w in warnings %}<li>{{ w }}</li>{% endfor %}</ul></div>
+{% endif %}
+
+<div class="legend" aria-hidden="true">
+  <span><i class="seg s1"></i>Skills 45%</span>
+  <span><i class="seg s2"></i>Text similarity 30%</span>
+  <span><i class="seg s3"></i>Experience 15%</span>
+  <span><i class="seg s4"></i>Education 10%</span>
+</div>
+
+<ol class="results">
+{% for c in candidates %}
+  <li class="card">
+    <div class="rank">{{ c.rank }}</div>
+    <div class="body">
+      <div class="head">
+        <h3>{{ c.name }}</h3>
+        <div class="score"><span>{{ c.score }}</span>%</div>
+      </div>
+      <div class="meta">
+        {% if c.email %}{{ c.email }}{% endif %}{% if c.phone %} &nbsp;|&nbsp; {{ c.phone }}{% endif %}
+        <span class="file">{{ c.filename }}</span>
+      </div>
+      <div class="bar" role="img" aria-label="Score breakdown">
+        <i class="seg s1" style="width: {{ (c.skill_score * 45)|round(1) }}%"></i><i class="seg s2" style="width: {{ (c.similarity_score * 30)|round(1) }}%"></i><i class="seg s3" style="width: {{ (c.experience_score * 15)|round(1) }}%"></i><i class="seg s4" style="width: {{ (c.education_score * 10)|round(1) }}%"></i>
+      </div>
+      <div class="facts">
+        {{ '%g' % c.experience_years }} yrs experience (estimated) &nbsp;|&nbsp; {{ c.education }}
+      </div>
+      <div class="skills">
+        {% if c.matched_skills %}<p><b>Has:</b> {% for s in c.matched_skills %}<span class="chip ok">{{ s }}</span>{% endfor %}</p>{% endif %}
+        {% if c.missing_skills %}<p><b>Missing:</b> {% for s in c.missing_skills %}<span class="chip miss">{{ s }}</span>{% endfor %}</p>{% endif %}
+      </div>
+    </div>
+  </li>
+{% endfor %}
+</ol>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="intro">
+  <h1>Drop in a job description and a stack of resumes. Get a ranked shortlist with reasons.</h1>
+</section>
+
+{% if errors %}
+<div class="notice error" role="alert">
+  <strong>Could not rank yet:</strong>
+  <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+
+<form class="grid" action="{{ url_for('main.rank') }}" method="post" enctype="multipart/form-data">
+  <div class="panel">
+    <h2>Job</h2>
+    <label for="job_title">Job title (optional)</label>
+    <input id="job_title" name="job_title" maxlength="120" placeholder="e.g. Machine Learning Engineer">
+    <label for="job_description">Job description</label>
+    <textarea id="job_description" name="job_description" rows="12"
+      placeholder="Paste the full job description. Mention skills, years of experience and degree - they are all scored."></textarea>
+    <label for="jd_file">...or upload it (used only if the box above is empty)</label>
+    <input id="jd_file" type="file" name="jd_file" accept=".pdf,.docx,.txt">
+  </div>
+
+  <div class="panel">
+    <h2>Resumes</h2>
+    <label for="resumes">PDF, DOCX or TXT - select several at once</label>
+    <input id="resumes" type="file" name="resumes" accept=".pdf,.docx,.txt" multiple required>
+    <p class="hint">Up to 50 files, 16 MB total. Scanned image-only PDFs have no text to read and will be skipped with a message.</p>
+    <button type="submit">Rank candidates</button>
+    <p class="hint small">Text analysis engine: {{ backend }}</p>
+  </div>
+</form>
+{% endblock %}

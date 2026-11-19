@@ -1,0 +1,17 @@
+PRIYA NAIR
+priya.nair@example.com
++91 91234 56780
+
+PROFILE
+Recent graduate passionate about machine learning and computer vision.
+
+PROJECTS
+- Face mask detection using OpenCV, Keras and TensorFlow with a Flask web app.
+- Fake news classifier with NLTK, TF-IDF and scikit-learn (92% F1).
+- Stock prediction with LSTM deep learning model.
+
+INTERNSHIP
+ML Intern, Elevate Labs (2025 - 2025): Python, pandas, numpy, Git, Streamlit.
+
+EDUCATION
+Bachelor of Technology in Computer Science, 2025
