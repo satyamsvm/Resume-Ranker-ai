@@ -93,6 +93,8 @@ python -m unittest discover -s tests -v
 5. Recruiter feedback loop to learn better weights
 6. Stripe billing for a hosted SaaS
 
+## 📄Project Report
+* (docs/Project_Report.pdf)
 ## License
 
 MIT
